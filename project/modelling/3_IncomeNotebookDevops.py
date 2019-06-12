@@ -21,11 +21,11 @@ par_model_name= dbutils.widgets.get("model_name")
 
 # COMMAND ----------
 
-import azureml.core
-from azureml.core import Workspace
-from azureml.core.authentication import ServicePrincipalAuthentication
-from azureml.core.run import Run
-from azureml.core.experiment import Experiment
+#import azureml.core
+#from azureml.core import Workspace
+#from azureml.core.authentication import ServicePrincipalAuthentication
+#from azureml.core.run import Run
+#from azureml.core.experiment import Experiment
 
 # Check core SDK version number
 print("SDK version:", azureml.core.VERSION)
@@ -68,29 +68,29 @@ from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 
 # inserted new code to get data from db
 
-val jdbcHostname = "40.85.172.154"
-val jdbcPort = 1433
-val jdbcDatabase = "databaseab1"
-val jdbcUsername = "mladmin"
-val jdbcPassword = "Satyam@12345"
+jdbcHostname = "40.85.172.154"
+jdbcPort = 1433
+jdbcDatabase = "databaseab1"
+jdbcUsername = "mladmin"
+jdbcPassword = "Satyam@12345"
 
 // Create the JDBC URL without passing in the user and password parameters.
-val jdbcUrl = s"jdbc:sqlserver://${jdbcHostname}:${jdbcPort};database=${jdbcDatabase}"
+jdbcUrl = s"jdbc:sqlserver://${jdbcHostname}:${jdbcPort};database=${jdbcDatabase}"
 
 // Create a Properties() object to hold the parameters.
 import java.util.Properties
-val connectionProperties = new Properties()
+connectionProperties = new Properties()
 
 connectionProperties.put("user", s"${jdbcUsername}")
 connectionProperties.put("password", s"${jdbcPassword}")
 
-val driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
 connectionProperties.setProperty("Driver", driverClass)
 
 #val employees_table = spark.read.jdbc(jdbcUrl, "employees", connectionProperties)
 
-val pushdown_query = "(select * from AdultCensusIncome)"
-val data_all = spark.read.jdbc(url=jdbcUrl, table=pushdown_query, properties=connectionProperties)
+pushdown_query = "(select * from AdultCensusIncome)"
+data_all = spark.read.jdbc(url=jdbcUrl, table=pushdown_query, properties=connectionProperties)
 display(data_all)
 
 
