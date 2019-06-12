@@ -75,17 +75,33 @@ jdbcUsername = "mladmin"
 jdbcPassword = "Satyam@12345"
 
 // Create the JDBC URL without passing in the user and password parameters.
-jdbcUrl = s"jdbc:sqlserver://${jdbcHostname}:${jdbcPort};database=${jdbcDatabase}"
+#jdbcUrl = s"jdbc:sqlserver://${jdbcHostname}:${jdbcPort};database=${jdbcDatabase}"
 
 // Create a Properties() object to hold the parameters.
-import java.util.Properties
-connectionProperties = new Properties()
 
-connectionProperties.put("user", s"${jdbcUsername}")
-connectionProperties.put("password", s"${jdbcPassword}")
+driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+url = "jdbc:sqlserver://"+jdbcHostname+":"+jdbcPort+";database="+jdbcDatabase,
+table = "AdultCensusIncome"
+user = jdbcUsername
+password = jdbcPassword
 
-driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-connectionProperties.setProperty("Driver", driverClass)
+
+all_data = spark.read.format("jdbc")\
+  .option("driver", driver)\
+  .option("url", url)\
+  .option("dbtable", table)\
+  .option("user", user)\
+  .option("password", password)\
+  .load()
+
+
+#import java.util.Properties
+#connectionProperties = new Properties()
+
+#connectionProperties.put("user", s"${jdbcUsername}")
+#connectionProperties.put("password", s"${jdbcPassword}")
+#driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+#connectionProperties.setProperty("Driver", driverClass)
 
 #val employees_table = spark.read.jdbc(jdbcUrl, "employees", connectionProperties)
 
