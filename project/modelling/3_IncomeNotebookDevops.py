@@ -69,29 +69,27 @@ from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 # inserted new code to get data from db
 
 jdbcHostname = "40.85.172.154"
-jdbcPort = 1433
+jdbcPort = "1433"
 jdbcDatabase = "databaseab1"
 jdbcUsername = "mladmin"
 jdbcPassword = "Satyam@12345"
 
-// Create the JDBC URL without passing in the user and password parameters.
+#// Create the JDBC URL without passing in the user and password parameters.
 #jdbcUrl = s"jdbc:sqlserver://${jdbcHostname}:${jdbcPort};database=${jdbcDatabase}"
 
-// Create a Properties() object to hold the parameters.
+#// Create a Properties() object to hold the parameters.
 
 driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-url = "jdbc:sqlserver://"+jdbcHostname+":"+jdbcPort+";database="+jdbcDatabase,
+#url = "jdbc:sqlserver://"+jdbcHostname+":"+jdbcPort+";database="+jdbcDatabase,
+url = "jdbc:sqlserver://"+jdbcHostname+":"+jdbcPort+";databaseName="+jdbcDatabase+";user="+jdbcUsername+";password="+jdbcPassword
+
 table = "AdultCensusIncome"
-user = jdbcUsername
-password = jdbcPassword
 
 
-all_data = spark.read.format("jdbc")\
+data_all = spark.read.format("jdbc")\
   .option("driver", driver)\
   .option("url", url)\
   .option("dbtable", table)\
-  .option("user", user)\
-  .option("password", password)\
   .load()
 
 
@@ -105,8 +103,8 @@ all_data = spark.read.format("jdbc")\
 
 #val employees_table = spark.read.jdbc(jdbcUrl, "employees", connectionProperties)
 
-pushdown_query = "(select * from AdultCensusIncome)"
-data_all = spark.read.jdbc(url=jdbcUrl, table=pushdown_query, properties=connectionProperties)
+#pushdown_query = "(select * from AdultCensusIncome)"
+#data_all = spark.read.jdbc(url=jdbcUrl, table=pushdown_query, properties=connectionProperties)
 display(data_all)
 
 
