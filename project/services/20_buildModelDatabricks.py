@@ -24,7 +24,7 @@ def trigger_training_job():
 #    domain = "westeurope.azuredatabricks.net" # change location in case databricks instance is not in westeurope
 #    DBR_PAT_TOKEN = bytes("<<your Databricks Personal Access Token>>", encoding='utf-8') # adding b'
 
-workspace="aiml-ws1"
+    workspace="aiml-ws1"
     subscription_id="05c034fe-a6e2-42b7-bdfe-519a3b3a40cf"
     resource_grp="vikram-aiml"
 
