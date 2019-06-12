@@ -19,7 +19,7 @@ def trigger_data_prep():
 
 # inserted new code for my run 
 
-workspace="aiml-ws1"
+    workspace="aiml-ws1"
     subscription_id="05c034fe-a6e2-42b7-bdfe-519a3b3a40cf"
     resource_grp="vikram-aiml"
 
