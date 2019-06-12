@@ -28,7 +28,7 @@ par_model_name= dbutils.widgets.get("model_name")
 #from azureml.core.experiment import Experiment
 
 # Check core SDK version number
-print("SDK version:", azureml.core.VERSION)
+#print("SDK version:", azureml.core.VERSION)
 
 # COMMAND ----------
 
