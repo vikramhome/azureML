@@ -45,6 +45,7 @@ from pyspark.ml.feature import OneHotEncoder, OneHotEncoderEstimator, StringInde
 from pyspark.ml.classification import LogisticRegression, DecisionTreeClassifier
 from pyspark.ml.evaluation import BinaryClassificationEvaluator
 from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
+from sqlalchemy import create_engine
 
 # COMMAND ----------
 
@@ -94,7 +95,7 @@ table = "AdultCensusIncome"
 #  .load()
 
 
-from sqlalchemy import create_engine
+
 engine = create_engine(url)
 
 with engine.connect() as conn, conn.begin():
