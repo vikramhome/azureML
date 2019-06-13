@@ -45,7 +45,7 @@ from pyspark.ml.feature import OneHotEncoder, OneHotEncoderEstimator, StringInde
 from pyspark.ml.classification import LogisticRegression, DecisionTreeClassifier
 from pyspark.ml.evaluation import BinaryClassificationEvaluator
 from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
-from sqlalchemy import create_engine
+#from sqlalchemy import create_engine
 
 # COMMAND ----------
 
@@ -88,18 +88,18 @@ url = "jdbc:sqlserver://"+jdbcHostname+":"+jdbcPort+";databaseName="+jdbcDatabas
 table = "AdultCensusIncome"
 
 
-#data_all = spark.read.format("jdbc")\
-#  .option("driver", driver)\
-#  .option("url", url)\
-#  .option("dbtable", table)\
-#  .load()
+data_all = spark.read.format("jdbc")\
+  .option("driver", driver)\
+  .option("url", url)\
+  .option("dbtable", table)\
+  .load()
 
 
 
-engine = create_engine(url)
+#engine = create_engine(url)
 
-with engine.connect() as conn, conn.begin():
-    data_all = pd.read_sql_table('table', conn)
+#with engine.connect() as conn, conn.begin():
+#    data_all = pd.read_sql_table('table', conn)
 
 #import java.util.Properties
 #connectionProperties = new Properties()
@@ -132,6 +132,10 @@ data_all.printSchema()
 # COMMAND ----------
 
 #data_all_p = pd.DataFrame(data_all)
+#data_all['split'] = np.random.randn(data_all.shape[0], 1)
+#print(data_all_p)
+
+data_all_p = pd.DataFrame(data_all,columns_new)
 #data_all['split'] = np.random.randn(data_all.shape[0], 1)
 print(data_all_p)
 
