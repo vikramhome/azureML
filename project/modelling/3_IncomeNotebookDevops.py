@@ -87,12 +87,18 @@ url = "jdbc:sqlserver://"+jdbcHostname+":"+jdbcPort+";databaseName="+jdbcDatabas
 table = "AdultCensusIncome"
 
 
-data_all = spark.read.format("jdbc")\
-  .option("driver", driver)\
-  .option("url", url)\
-  .option("dbtable", table)\
-  .load()
+#data_all = spark.read.format("jdbc")\
+#  .option("driver", driver)\
+#  .option("url", url)\
+#  .option("dbtable", table)\
+#  .load()
 
+
+from sqlalchemy import create_engine
+engine = create_engine(url)
+
+with engine.connect() as conn, conn.begin():
+    data_all = pd.read_sql_table('table', conn)
 
 #import java.util.Properties
 #connectionProperties = new Properties()
@@ -124,7 +130,7 @@ data_all.printSchema()
 
 # COMMAND ----------
 
-data_all_p = pd.DataFrame(data_all)
+#data_all_p = pd.DataFrame(data_all)
 #data_all['split'] = np.random.randn(data_all.shape[0], 1)
 print(data_all_p)
 
