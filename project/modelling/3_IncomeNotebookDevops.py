@@ -87,7 +87,7 @@ url = "jdbc:sqlserver://"+jdbcHostname+":"+jdbcPort+";databaseName="+jdbcDatabas
 table = "AdultCensusIncome"
 
 
-data_all_p = spark.read.format("jdbc")\
+data_all = spark.read.format("jdbc")\
   .option("driver", driver)\
   .option("url", url)\
   .option("dbtable", table)\
@@ -106,11 +106,11 @@ data_all_p = spark.read.format("jdbc")\
 
 #pushdown_query = "(select * from AdultCensusIncome)"
 #data_all = spark.read.jdbc(url=jdbcUrl, table=pushdown_query, properties=connectionProperties)
-display(data_all_p)
-
-data_all = pd.DataFrame(data_all_p)
-
 display(data_all)
+
+#data_all = pd.DataFrame(data_all_p)
+
+#display(data_all)
 
 data_all.shape
 
@@ -124,7 +124,15 @@ data_all.printSchema()
 
 # COMMAND ----------
 
-(trainingData, testData) = data_all.randomSplit([0.7, 0.3], seed=1223)
+data_all['split'] = np.random.randn(data_all.shape[0], 1)
+
+msk = np.random.rand(len(data_all)) <= 0.7
+
+train = data_all[msk]
+test = data_all[~msk]
+
+
+#(trainingData, testData) = data_all.randomSplit([0.7, 0.3], seed=1223)
 
 #(testData, trainingData) = data_all.randomSplit([0.3, 0.7], seed=1223)
 
