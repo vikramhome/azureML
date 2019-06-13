@@ -142,11 +142,11 @@ trainingData.printSchema()
 display(testData)
 testData.printSchema()
 
-trainingData.shape
+#trainingData.shape
 
 len(training_data.index)
 
-testData.shape
+#testData.shape
 
 len(test_data.index)
 
