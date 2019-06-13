@@ -124,12 +124,15 @@ data_all.printSchema()
 
 # COMMAND ----------
 
+data_all_p = pd.DataFrame(data_all)
 #data_all['split'] = np.random.randn(data_all.shape[0], 1)
+print(data_all_p)
 
-msk = np.random.rand(len(data_all)) <= 0.7
 
-train = data_all[msk]
-test = data_all[~msk]
+msk = np.random.rand(len(data_all_p)) <= 0.7
+
+train = data_all_p[msk]
+test = data_all_p[~msk]
 
 
 #(trainingData, testData) = data_all.randomSplit([0.7, 0.3], seed=1223)
