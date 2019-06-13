@@ -118,6 +118,13 @@ data_all.printSchema()
 
 (trainingData, testData) = data_all.randomSplit([0.7, 0.3], seed=122423)
 
+display(trainingData)
+trainingData.printSchema()
+
+display(testData)
+testData.printSchema()
+
+
 # COMMAND ----------
 
 label = "income"
