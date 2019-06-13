@@ -135,7 +135,7 @@ data_all.printSchema()
 #data_all['split'] = np.random.randn(data_all.shape[0], 1)
 #print(data_all_p)
 
-data_all_p = pd.DataFrame(data_all,columns_new)
+data_all_p = pd.DataFrame(data_all,data_all.columns)
 #data_all['split'] = np.random.randn(data_all.shape[0], 1)
 print(data_all_p)
 
