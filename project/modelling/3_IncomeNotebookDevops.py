@@ -116,7 +116,9 @@ data_all.printSchema()
 
 # COMMAND ----------
 
-trainingData, testData = data_all.randomSplit([0.7, 0.3], seed=1223)
+(trainingData, testData) = data_all.randomSplit([0.7, 0.3], seed=1223)
+
+(testData, trainingData) = data_all.randomSplit([0.3, 0.7], seed=1223)
 
 display(trainingData)
 trainingData.printSchema()
