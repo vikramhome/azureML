@@ -124,7 +124,7 @@ data_all.printSchema()
 
 # COMMAND ----------
 
-data_all['split'] = np.random.randn(data_all.shape[0], 1)
+#data_all['split'] = np.random.randn(data_all.shape[0], 1)
 
 msk = np.random.rand(len(data_all)) <= 0.7
 
