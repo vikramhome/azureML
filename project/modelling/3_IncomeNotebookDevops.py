@@ -107,6 +107,10 @@ data_all = spark.read.format("jdbc")\
 #data_all = spark.read.jdbc(url=jdbcUrl, table=pushdown_query, properties=connectionProperties)
 display(data_all)
 
+row_count_all = data_all.count()
+print row_count_all
+
+
 
 #renaming columns, all columns that contain a - will be replaced with an "_"
 columns_new = [col.replace("-", "_") for col in data_all.columns]
@@ -125,6 +129,13 @@ trainingData.printSchema()
 
 display(testData)
 testData.printSchema()
+
+row_count_train = trainingData.count()
+print row_count_train
+
+row_count_test = testData.count()
+print row_count_test
+
 
 
 # COMMAND ----------
