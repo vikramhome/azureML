@@ -38,6 +38,7 @@ import pprint
 import numpy as np
 import shutil
 import time
+import pandas as pd
 
 from pyspark.ml import Pipeline, PipelineModel
 from pyspark.ml.feature import OneHotEncoder, OneHotEncoderEstimator, StringIndexer, VectorAssembler
@@ -86,7 +87,7 @@ url = "jdbc:sqlserver://"+jdbcHostname+":"+jdbcPort+";databaseName="+jdbcDatabas
 table = "AdultCensusIncome"
 
 
-data_all = spark.read.format("jdbc")\
+data_all_p = spark.read.format("jdbc")\
   .option("driver", driver)\
   .option("url", url)\
   .option("dbtable", table)\
@@ -105,12 +106,15 @@ data_all = spark.read.format("jdbc")\
 
 #pushdown_query = "(select * from AdultCensusIncome)"
 #data_all = spark.read.jdbc(url=jdbcUrl, table=pushdown_query, properties=connectionProperties)
+display(data_all_p)
+
+data_all = pd.DataFrame(data_all_p)
+
 display(data_all)
 
-row_count_all = data_all.count()
-print row_count_all
+data_all.shape
 
-
+len(data_all.index)
 
 #renaming columns, all columns that contain a - will be replaced with an "_"
 columns_new = [col.replace("-", "_") for col in data_all.columns]
@@ -122,7 +126,7 @@ data_all.printSchema()
 
 (trainingData, testData) = data_all.randomSplit([0.7, 0.3], seed=1223)
 
-(testData, trainingData) = data_all.randomSplit([0.3, 0.7], seed=1223)
+#(testData, trainingData) = data_all.randomSplit([0.3, 0.7], seed=1223)
 
 display(trainingData)
 trainingData.printSchema()
@@ -130,11 +134,13 @@ trainingData.printSchema()
 display(testData)
 testData.printSchema()
 
-row_count_train = trainingData.count()
-print row_count_train
+trainingData.shape
 
-row_count_test = testData.count()
-print row_count_test
+len(training_data.index)
+
+testData.shape
+
+len(test_data.index)
 
 
 
