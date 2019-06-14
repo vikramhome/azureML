@@ -134,8 +134,8 @@ data_all.printSchema()
 #data_all_p = pd.DataFrame(data_all)
 #data_all['split'] = np.random.randn(data_all.shape[0], 1)
 #print(data_all_p)
-columns2=["age","workclass","fnlwgt","education","education-num","marital-status","occupation","relationship","race","sex","capital-gain","capital-loss","hours-per-week","native-country","income"]
-data_all_p = pd.DataFrame(data_all,columns2)
+#columns2=["age","workclass","fnlwgt","education","education-num","marital-status","occupation","relationship","race","sex","capital-gain","capital-loss","hours-per-week","native-country","income"]
+data_all_p = pd.DataFrame(data_all,columns='age','workclass','fnlwgt','education','education-num','marital-status','occupation','relationship','race','sex','capital-gain','capital-los','hours-per-week','native-country','income')
 #data_all['split'] = np.random.randn(data_all.shape[0], 1)
 print(data_all_p)
 
